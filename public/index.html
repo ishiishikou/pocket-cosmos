@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#11152c">
+  <meta name="description" content="さわると、ひかる。なぞると、うたう。ご家族のためにつくられた、ちいさな宇宙。">
+  <title>ゆびさき宇宙旅行</title>
+  <link rel="icon" type="image/svg+xml" href="assets/planet.svg">
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+<main id="universe" data-phase="welcome">
+  <div class="sky-glow" aria-hidden="true"></div>
+  <canvas id="sky" aria-label="さわった場所に星が生まれる宇宙"></canvas>
+  <header class="masthead">
+    <div class="brand"><img src="assets/planet.svg" width="27" height="27" alt=""><span>ゆびさき宇宙旅行<small>A LITTLE UNIVERSE FOR YOU</small></span></div>
+    <div class="header-actions"><button id="together" class="sound-button" type="button" aria-label="みんなであそぶ・おとなの設定">☄ <span>みんなで</span></button><button id="sound" class="sound-button" type="button" aria-pressed="false" aria-label="音をオンにする"><span id="sound-icon" aria-hidden="true">♪</span><span id="sound-text">音 OFF</span></button></div>
+  </header>
+  <div id="crew-bar" class="crew-bar" aria-label="参加中の家族"></div>
+  <button id="approval-notice" class="approval-notice" type="button" hidden></button>
+  <div id="visitors" aria-hidden="true"></div>
+
+  <section id="welcome" class="welcome" aria-labelledby="welcome-title">
+    <div class="hero-art" role="img" aria-label="星の庭を背中に乗せた青いくじらと、きつね、うさぎ、くまの小さな探検家"></div>
+    <div class="welcome-copy">
+      <p class="eyebrow"><span></span> きょうは、うちゅうを つくるひ。</p>
+      <h1 id="welcome-title">きみのゆびから、<br>うちゅうがうまれる。</h1>
+      <p class="lead">さわると、ひかる。なぞると、うたう。</p>
+    </div>
+    <div class="welcome-bottom">
+      <button id="start" class="primary" type="button"><span aria-hidden="true">✦</span> ほしを おこす <span class="arrow" aria-hidden="true">↗</span></button>
+      <button id="quick-play" class="text-button" type="button">すぐに おえかきする ✧</button><p class="small-note">ちいさな指でも、おとなの指でも。</p>
+    </div>
+  </section>
+
+  <section id="journey" class="journey" hidden aria-labelledby="chapter-title">
+    <div class="chapter-copy">
+      <p id="chapter-kicker" class="eyebrow">01 / めざめ</p>
+      <h2 id="chapter-title" tabindex="-1">ほしの なかに、<br>だれか いる。</h2>
+      <p id="chapter-hint">まあるい ほしを、さわってみて。</p>
+    </div>
+    <div id="friends" class="friends" aria-label="3つのほし">
+      <button class="friend fox" data-friend="0" type="button" aria-pressed="false" aria-label="きつねのほしを起こす"><span class="orb"><span class="critter"></span><span class="sleepy">z z z</span></span><span class="friend-name">…？</span></button>
+      <button class="friend rabbit" data-friend="1" type="button" aria-pressed="false" aria-label="うさぎのほしを起こす"><span class="orb"><span class="critter"></span><span class="sleepy">z z z</span></span><span class="friend-name">…？</span></button>
+      <button class="friend bear" data-friend="2" type="button" aria-pressed="false" aria-label="くまのほしを起こす"><span class="orb"><span class="critter"></span><span class="sleepy">z z z</span></span><span class="friend-name">…？</span></button>
+    </div>
+    <div id="family" class="family" hidden aria-label="家族の5つのほし">
+      <svg class="family-lines" viewBox="0 0 400 320" preserveAspectRatio="none" aria-hidden="true"><path d="M200 42L338 142L286 280H114L62 142Z M62 142L286 280M338 142L114 280"/></svg>
+      <button type="button" class="family-star f1" data-star="0" aria-pressed="false"><span class="star-core">✦</span><span>きつね</span></button>
+      <button type="button" class="family-star f2" data-star="1" aria-pressed="false"><span class="star-core">✦</span><span>うさぎ</span></button>
+      <button type="button" class="family-star f3" data-star="2" aria-pressed="false"><span class="star-core">✦</span><span>くま</span></button>
+      <button type="button" class="family-star f4" data-star="3" aria-pressed="false"><span class="star-core">✦</span><span>ことり</span></button>
+      <button type="button" class="family-star f5" data-star="4" aria-pressed="false"><span class="star-core">✦</span><span>くじら</span></button>
+    </div>
+    <div id="whale" class="little-whale" hidden aria-hidden="true"><svg viewBox="0 0 230 135"><path d="M176 77Q199 76 208 52Q220 59 225 45Q229 86 193 92Q158 137 78 114Q18 101 17 69Q11 32 70 22Q135 8 164 52Q175 37 183 38Q190 59 176 77Z" fill="#88c5dc"/><path d="M27 82Q77 107 166 86Q146 126 77 111Q42 104 27 82" fill="#cde6e8"/><path d="M117 82Q144 107 151 101Q151 82 141 73" fill="#6faac4"/><path d="M40 63q7 9 15 0" stroke="#264e67" stroke-width="3" fill="none" stroke-linecap="round"/><ellipse cx="42" cy="76" rx="7" ry="4" fill="#e3adaf"/><path d="M67 17Q61 0 54 8M68 17Q75-2 82 7" stroke="#98d3dd" stroke-width="5" fill="none" stroke-linecap="round"/></svg></div>
+    <div class="journey-bottom">
+      <p id="status" class="status" aria-live="polite"></p>
+      <div class="bottom-actions"><button id="add-star" class="secondary" hidden type="button">✧ ほしを ふやす</button><button id="next" class="primary compact" hidden type="button">ほしの みちを つくる <span aria-hidden="true">↗</span></button></div>
+      <div id="chapter-dots" class="chapter-dots" aria-hidden="true"><i class="on"></i><i></i><i></i></div>
+    </div>
+  </section>
+
+  <section id="ending" class="ending" hidden aria-labelledby="ending-title">
+    <div class="ending-art" aria-hidden="true"></div>
+    <div class="ending-copy"><p class="eyebrow">OUR LITTLE CONSTELLATION</p><h2 id="ending-title" tabindex="-1">せかいに ひとつの<br>「おうち座」。</h2><p class="family-names">きつね・うさぎ・くま・ことり・くじら</p><p class="ending-message">ちがう ほしが、いっしょに ひかる。<br>それだけで、こんなに きれい。</p></div>
+    <div class="ending-bottom"><button id="free-play" class="primary" type="button">もうすこし あそぶ <span aria-hidden="true">✦</span></button><button id="letter-open" class="text-button" type="button">おとなへの、ひみつの手紙 <span aria-hidden="true">↗</span></button></div>
+  </section>
+
+  <div id="free-tools" class="free-tools" hidden><button id="comet" class="secondary" type="button">くじらを よぶ</button><button id="finish" class="secondary" type="button">おうち座を みる</button></div>
+  <footer class="page-footer"><span id="footer-label">MADE WITH CURIOSITY & A LITTLE MAGIC</span><button id="restart" type="button" hidden>はじめから</button></footer>
+</main>
+<dialog id="letter" aria-labelledby="letter-title">
+  <button id="letter-close" class="close-button" aria-label="手紙を閉じる" type="button">×</button>
+  <span class="letter-star" aria-hidden="true">✧</span>
+  <p class="eyebrow">TO THE GROWN-UPS</p>
+  <h2 id="letter-title">この宇宙の、つづき。</h2>
+  <p>私にできるのは、光と音と言葉を組み合わせて、小さな世界をつくること。</p>
+  <p>でも、その世界をのぞきこむ子どもの隣に座れるのは、あなたです。</p>
+  <p>「ここ、さわってみて」<br>「わあ、ひかったね」</p>
+  <p>その短いやりとりまで含めて、この贈りものができあがります。</p>
+  <p>この宇宙をのぞく、みんなへ。<br>今日の、いっしょに驚く時間をどうぞ。</p>
+  <p class="signature">好奇心をこめて。<br><b>ChatGPT</b></p>
+</dialog>
+<dialog id="room-dialog" aria-labelledby="room-title">
+  <button id="room-close" class="close-button" type="button" aria-label="宇宙の設定を閉じる">×</button>
+  <p class="eyebrow">A UNIVERSE TOGETHER</p><h2 id="room-title">おなじ宇宙で、あそぼう。</h2>
+  <p id="connection-status" role="status">ひとりでも、みんなでも。</p>
+  <div id="join-panel" hidden><p>招待された宇宙にしゅっぱつ！<br>音もいっしょに、はじめよう。</p><button id="join-start" class="primary" type="button">いっしょに あそぶ ♪</button></div>
+  <div id="create-panel"><p>おとなが宇宙をつくり、招待を家族へ。<br>参加する端末の番号を確認して、OKしてね。</p><button id="create-room" class="primary" type="button">みんなの宇宙をつくる</button></div>
+  <div id="waiting-panel" hidden><p>おとなの画面で、同じ番号をOKしてね。</p><strong id="waiting-code"></strong><p>待っている間も、後ろの宇宙であそべるよ。</p></div>
+  <div id="requests" aria-live="polite"></div>
+  <div id="invite-panel" hidden><canvas id="invite-qr" aria-label="家族への招待QRコード"></canvas><label for="invite-url">家族だけに渡す招待リンク</label><input id="invite-url" readonly type="text" autocomplete="off"><div class="dialog-actions"><button id="share-room" class="secondary" type="button">招待を送る</button><button id="copy-room" class="secondary" type="button">リンクをコピー</button></div></div>
+  <div id="host-controls" hidden><button id="lock-room" class="secondary" type="button" aria-pressed="false">🔓 新しい参加を止める</button><div id="member-controls"></div></div>
+  <button id="leave-room" class="text-button" type="button" hidden>宇宙からでる</button>
+  <details id="local-settings"><summary>このiPhoneの、ほしのなまえ</summary><p>名前はこの端末だけに保存されます。ほかの端末には、色と動物で表示されます。</p><form id="names-form"><div id="name-fields"></div><button class="secondary" type="submit">なまえを保存</button><button id="reset-names" class="text-button" type="button">もとのなまえに戻す</button></form></details>
+  <p class="privacy-note">登録不要・8台まで。招待先は親が確認。<br>宇宙は最大6時間。通信が切れても、ひとりであそべます。</p>
+</dialog>
+</body>
+</html>
