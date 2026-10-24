@@ -144,8 +144,8 @@ async function startScanner(){
     scanStream=await navigator.mediaDevices.getUserMedia({
       audio:false,video:{facingMode:{ideal:'environment'},width:{ideal:1280},height:{ideal:720}}
     });
-    const video=$('p2p-video');video.srcObject=scanStream;await video.play();
-    $('p2p-camera').hidden=false;
+    const video=$('p2p-video');$('p2p-camera').hidden=false;
+    video.srcObject=scanStream;await video.play();
     const token=++scanToken,canvas=document.createElement('canvas'),ctx=canvas.getContext('2d',{willReadFrequently:true});
     async function scan(){
       if(token!==scanToken||!scanStream)return;
