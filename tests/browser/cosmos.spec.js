@@ -39,8 +39,8 @@ test('solo quick play, touch tap and fixed canvas do not select or scroll',async
   const count=Number(await page.locator('#sky').getAttribute('data-points'));expect(count).toBeGreaterThan(2);
   await page.setViewportSize({width:667,height:375});await expect(page.locator('#comet')).toBeInViewport();
 });
-test('parent approval, bidirectional drawing and actual audio scheduling',async(args,info)=>{
-  const {page}=args;const {guest,context}=await pair(args,info);
+test('parent approval, bidirectional drawing and actual audio scheduling',async({page,browser},info)=>{
+  const {guest,context}=await pair({page,browser},info);
   try{
     const hostNotes=Number(await page.locator('#sky').getAttribute('data-notes-played')||0);
     const guestNotes=Number(await guest.locator('#sky').getAttribute('data-notes-played')||0);
@@ -54,8 +54,8 @@ test('parent approval, bidirectional drawing and actual audio scheduling',async(
     await page.getByRole('button',{name:'くじらを よぶ'}).click();await expect(guest.locator('#whale')).toBeVisible();
   }finally{await context.close();}
 });
-test('reload reconnects the same participant and audio resumes with a gesture',async(args,info)=>{
-  const {page}=args;const {guest,context}=await pair(args,info);
+test('reload reconnects the same participant and audio resumes with a gesture',async({page,browser},info)=>{
+  const {guest,context}=await pair({page,browser},info);
   try{
     const members=await guest.locator('.crew-member').evaluateAll(els=>els.map(e=>e.dataset.member));
     await guest.reload();await expect(guest.locator('#universe')).toHaveAttribute('data-connection','joined');
