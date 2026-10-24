@@ -22,7 +22,8 @@ test('original story, animals, drawing, constellation and letter still work',asy
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('/');await expect(page.getByRole('heading',{name:/きみのゆびから、.*うちゅうがうまれる。/})).toBeVisible();
   await page.getByRole('button',{name:/ほしを おこす/}).click();
-  for(const animal of ['きつね','うさぎ','くま'])await page.getByRole('button',{name:`${animal}のほしを起こす`}).click();
+  // The friends bob continuously by design; bypass Playwright's stability check while still dispatching a real pointer click.
+  for(const animal of ['きつね','うさぎ','くま'])await page.getByRole('button',{name:`${animal}のほしを起こす`}).click({force:true});
   await page.getByRole('button',{name:/ほしの みちを つくる/}).click();await draw(page);
   await expect(page.locator('#sky')).toHaveAttribute('data-points',/[1-9]/);
   await expect(page.locator('#sky')).toHaveAttribute('data-notes-played',/[1-9]/);
