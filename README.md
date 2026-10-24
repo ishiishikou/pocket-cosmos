@@ -53,3 +53,28 @@ npm start
 デプロイ後は [docs/iphone-checklist.md](docs/iphone-checklist.md) に従い、2台以上のiPhone Safariで承認、光、音、再接続、画面回転、タッチ選択防止を確認します。実機で未検証の項目は完了として扱いません。
 
 開発状況の正本: [Issue #1](https://github.com/ishiishikou/pocket-cosmos/issues/1)。実装PR: [#2](https://github.com/ishiishikou/pocket-cosmos/pull/2)。
+
+
+## カード登録なしで遊ぶ：GitHub Pages（P2P実験モード）
+
+本リポジトリには、既存Node/WebSocketサーバー版のほか、**GitHub Pagesで動く2台専用のWebRTC P2P版**があります。接続準備にはサーバーを使わず、親と子がOffer/AnswerのQRコードを互いのiPhone画面から読み取ります。読み取りが難しい場合はコードをコピーして貼り付けます。
+
+1. 親と子のiPhoneを同じ自宅Wi-Fiに接続する（またはテザリングで一方を接続）。
+2. 公開URL \`https://ishiishikou.github.io/pocket-cosmos/\` を両方で開く。公開前は後述の設定が必要。
+3. 親で「みんなで」→「おとなが宇宙をつくる」。子で「みんなで」→「こどもが参加する」→「QRコードを読み取る」。
+4. 子が親のQRを読み取ったら、子に出た「返事のQR」を親が読み取る。
+5. 双方が直接接続されたら、光・音符・くじらの演出を双方向に楽しめる。
+
+ブラウザ同士のRTCDataChannelは暗号化され、クラウドの中継サーバーは使用しません。Safariの端末ごとのローカル接続制限、Wi-Fiの端末間通信遮断、iPhoneテザリングの構造により、同じネットワークでも接続できない場合があります。**iPhone実機で接続が確認できるまでは試作版です。** 最初のバージョンは2台専用で、3台以上の同時参加は未対応です。
+
+\`\`\`bash
+npm ci
+npm run verify
+npm run build:pages
+\`\`\`
+
+これにより \`dist/index.html\` に静的P2P版が生成されます。GitHubの Settings → Pages → Build and deployment → Source を **GitHub Actions** に設定すると、\`.github/workflows/pages.yml\` から自動で公開します。初回サイト設定にはリポジトリ管理者の操作が必要になる場合があります。追加のクラウド契約は必要ありません。
+
+Safariの「ホーム画面に追加」に対応し、初回オンライン読込後はService Workerで静的アプリを保存してオフライン起動を試みます。アプリを開く際にインターネットが必要なくても、iPhone間のローカル通信が確立できることとは別です。通信を再開するには接続コードを交換し直します。
+
+iPhone検証方法: [docs/p2p-test-plan.md](docs/p2p-test-plan.md)。既存のNode/WebSocket版の使い方・テストはそのまま残しています。
