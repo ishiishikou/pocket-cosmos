@@ -14,11 +14,13 @@
     "test": "node --test tests/*.test.js",
     "test:e2e": "playwright test",
     "check": "node scripts/check.mjs",
-    "verify": "npm run check && npm test && npm run build"
+    "verify": "npm run check && npm test && npm run build",
+    "build:pages": "node scripts/build.mjs --pages"
   },
   "dependencies": {
     "qrcode": "1.5.4",
-    "ws": "8.22.0"
+    "ws": "8.22.0",
+    "jsqr": "1.4.0"
   },
   "devDependencies": {
     "@playwright/test": "1.64.1",
