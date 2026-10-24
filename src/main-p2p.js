@@ -96,6 +96,7 @@ async function showCode(code,message){
 }
 async function startHost(){
   if(busy)return;
+  experience.unlock(); // iOS Web Audio must be enabled in an explicit user gesture.
   busy=true;role='host';$('p2p-actions').hidden=true;$('p2p-reset').hidden=false;
   status('親の接続コードを作っています…');
   try{
@@ -108,6 +109,7 @@ async function startHost(){
 }
 function startGuest(){
   if(busy)return;
+  experience.unlock();
   role='guest';$('p2p-actions').hidden=true;$('p2p-reset').hidden=false;
   $('p2p-import').hidden=false;status('② 親のiPhoneにあるQRコードを読み取ってください。');
 }
