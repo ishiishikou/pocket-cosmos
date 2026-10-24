@@ -1,0 +1,16 @@
+{
+  "name": "ゆびさき宇宙旅行・直接つながる",
+  "short_name": "ゆびさき宇宙",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#11152c",
+  "theme_color": "#11152c",
+  "icons": [
+    {
+      "src": "./assets/planet.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
